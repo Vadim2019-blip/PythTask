@@ -1,0 +1,6 @@
+README.md
+setup.cfg
+password_manager.egg-info/PKG-INFO
+password_manager.egg-info/SOURCES.txt
+password_manager.egg-info/dependency_links.txt
+password_manager.egg-info/top_level.txt
