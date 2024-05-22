@@ -77,10 +77,14 @@ class Frame:
         Operation realization:
             https://github.com/python/cpython/blob/3.9/Python/ceval.c#L2416
         """
-
-        # TODO: parse all scopes
-        self.push(self.locals[arg])
-
+        if arg in self.locals:
+            self.push(self.locals[arg])
+        elif arg in self.builtins:
+            self.push(self.builtins[arg])
+        elif arg in self.globals:
+            self.push(self.globals[arg])
+        else:
+            raise  NameError
     def load_global_op(self, arg: str) -> None:
         """
         Operation description:
@@ -89,8 +93,12 @@ class Frame:
         Operation realization:
             https://github.com/python/cpython/blob/3.9/Python/ceval.c#L2480
         """
-        # TODO: parse all scopes
-        self.push(self.builtins[arg])
+        if arg in self.builtins:
+            self.push(self.builtins[arg])
+        elif arg in self.globals:
+            self.push(self.globals[arg])
+        else:
+            raise NameError
 
     def load_const_op(self, arg: tp.Any) -> None:
         """
@@ -121,7 +129,6 @@ class Frame:
             https://github.com/python/cpython/blob/3.9/Python/ceval.c#L1361
         """
         self.pop()
-
     def make_function_op(self, arg: int) -> None:
         """
         Operation description:
