@@ -10,3 +10,10 @@ def nonzero_product(matrix: np.ndarray) -> tp.Optional[float]:
     :param matrix: array,
     :return: product value or None
     """
+    data = matrix.diagonal()
+    nonzero_elements = data[np.where(data != 0)]
+    if len(nonzero_elements) == 0:
+        return None
+    product = np.prod(nonzero_elements)
+    return product
+
